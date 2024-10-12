@@ -1,3 +1,5 @@
+# Introduction
+
 Pointers are a fundamental concept in C++ that allow you to directly access and manipulate the memory of your program. This is a powerful tool but also requires careful use to avoid bugs like memory leaks or segmentation faults. Here’s a beginner-friendly explanation of pointers, their usage, and how they differ from references and regular variables in C++.
 
 ### What is a Pointer?
@@ -16,6 +18,11 @@ int main() {
     // 'ptr' now holds the address of 'number', not the value 42 itself
     std::cout << "Address of number: " << ptr << std::endl; // Prints the address of 'number'
     std::cout << "Value of number: " << *ptr << std::endl;  // Prints the value stored at the address (42)
+
+    // Assign a new value to the memory location of `number`
+    *ptr = 20;
+    std::cout << "After: " << number << std::endl;  // Prints 20
+    std::cout << "Value through pointer: " << *ptr << std::endl; // Also prints 20
 
     return 0;
 }
@@ -121,3 +128,131 @@ int main() {
 ### Conclusion
 
 Pointers are a powerful feature in C++ that allow direct memory manipulation. While they can be more complex than Python’s automatic memory management, they provide greater control and efficiency, especially in system-level programming. With careful use and understanding, pointers enable advanced programming techniques and efficient resource management.
+
+# Note
+
+## Pointer concept
+```cpp
+// pointer_var is a pointer to int
+int* pointer_var;  
+
+// Assigning address to pointer
+int var = 4
+int* pointer_var = &var
+
+// Get the value from the address using pointer
+// `*` is the dereferencing operator.
+// It returns the value stored the address that the pointer is pointing to
+std::cout << *pointer_var << endl;
+
+```
+
+Another practice:
+```cpp
+#include <iostream>
+using namespace std;
+int main() {
+    int var = 5;
+
+    // store address of var
+    int* point_var = &var;
+
+    // print var
+    cout << "var = " << var << endl;
+
+    // print *point_var
+    cout << "*point_var = " << *point_var << endl
+         << endl;
+         
+    // print *point_var
+    cout << "point_var = " << point_var << endl
+         << endl;
+
+    // -------------------------------------------
+    cout << "Changing value of var to 7:" << endl;
+
+    // change value of var to 7
+    var = 7;
+
+    // print var
+    cout << "var = " << var << endl;
+
+    // print *point_var
+    cout << "*point_var = " << *point_var << endl
+         << endl;
+         
+         // print *point_var
+    cout << "point_var = " << point_var << endl
+         << endl;
+
+    // -------------------------------------------
+    cout << "Changing value of *point_var to 16:" << endl;
+
+    // change value of var to 16
+    *point_var = 16;
+
+    // print var
+    cout << "var = " << var << endl;
+
+    // print *point_var
+    cout << "*point_var = " << *point_var << endl;
+    
+    // print *point_var
+    cout << "point_var = " << point_var << endl
+         << endl;
+    return 0;
+}
+```
+
+Outputs:
+```
+var = 5
+*point_var = 5
+
+point_var = 0x7fffffffdafc
+
+Changing value of var to 7:
+var = 7
+*point_var = 7
+
+point_var = 0x7fffffffdafc
+
+Changing value of *point_var to 16:
+var = 16
+*point_var = 16
+point_var = 0x7fffffffdafc
+```
+> The memory address does not change. 
+
+## Working with array
+
+`array` datatype is essentially an address.
+The pointer of arr will point the first element of the pointer.
+
+```cpp
+int *ptr;
+int arr[5];
+ptr = arr;  // first element of the arr
+```
+
+Tha above is the same as:
+
+```cpp
+int *ptr;
+int arr[5];
+ptr = &arr[0]; // First element of arr
+```
+
+To access the elements,
+```cpp
+int *ptr;
+int arr[5];
+ptr = arr;
+
+// use dereference operator
+*ptr == arr[0];
+*(ptr + 1) is equivalent to arr[1];
+*(ptr + 2) is equivalent to arr[2];
+*(ptr + 3) is equivalent to arr[3];
+*(ptr + 4) is equivalent to arr[4];
+```
